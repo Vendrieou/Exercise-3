@@ -1,0 +1,19 @@
+table{    
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+th{
+    border: #000000;
+    cursor: pointer; 
+}
+body{
+    text-align: center;
+    background-color: rgb(117, 153, 221);
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.bg{
+    background-color: rgba(30, 46, 26, 0.644);
+}

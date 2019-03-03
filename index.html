@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet"> 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./asset/jquery.min.js"></script>
+    <title>Table Data</title>
+</head>
+<body>
+     <div class="container" id="demo">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="search", title="Type in a name">
+        <br /><br />
+                <table id="tableData" class="myTable">
+                        <thead>
+                            <tr type="button">
+                                <th id="theader['name']" onclick="sortTable('name')">name</th>
+                                <th id="theader['rotation_period']" onclick="sortTable('rotation_period')">rotation_period</th>
+                                <th id="theader['orbital_period']" onclick="sortTable('orbital_period')">orbital_period</th>
+                                <th id="theader['diameter']" onclick="sortTable('diameter')">diameter</th>
+                                <th id="theader['climate']" onclick="sortTable('climate')">climate</th>
+                                <th id="theader['gravity']" onclick="sortTable('gravity')">gravity</th>
+                                <th id="theader['terrain']" onclick="sortTable('terrain')">terrain</th>
+                                <th id="theader['surface_water']" onclick="sortTable('surface_water')">surface_water</th>
+                                <th id="theader['population']" onclick="sortTable('population')">population</th>
+                                <th id="theader['residents']" onclick="sortTable('residents')">residents</th>
+                                <th id="theader['films']" onclick="sortTable('films')">films</th>
+                                <th id="theader['url']" onclick="sortTable('url')">url</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody></tbody>
+                </table>
+            </div> 
+    <script src="./data.js"></script>
+    <script>
+        renderTable(data)
+        let sorter = true
+        function renderTable (dataCustom = []) {
+            for (var count in dataCustom) {
+            $('#tableData > tbody').append(
+                `<tr> 
+                    <td>${dataCustom[count].name}</td>
+                    <td>${dataCustom[count].rotation_period}</td>
+                    <td>${dataCustom[count].orbital_period}</td>
+                    <td>${dataCustom[count].diameter}</td>
+                    <td>${dataCustom[count].climate}</td>
+                    <td>${dataCustom[count].gravity}</td>
+                    <td>${dataCustom[count].terrain}</td>
+                    <td>${dataCustom[count].surface_water}</td>
+                    <td>${dataCustom[count].population}</td>
+                    <td><a target="_blank" href="${dataCustom[count].residents}">Link</a></td>
+                    <td><a href="${dataCustom[count].films}">Link</a></td>
+                    <td><a href="${dataCustom[count].url}">Link</a></td>
+                </tr>`
+            )
+            }
+        }
+        //sort
+        function sortTable (tdName) {
+            if (sorter) {
+                data = data.sort((a,b) => (a[tdName] > b[tdName]) ? 1 : ((b[tdName] > a[tdName]) ? -1 : 0));
+            } else {
+                data = data.sort((a,b) => (b[tdName] > a[tdName]) ? 1 : ((a[tdName] > b[tdName]) ? -1 : 0));
+            } 
+            $('#tableData > tbody').empty()
+            renderTable(data)
+            sorter = !sorter
+        }
+        //sort
+
+        //search
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("tableData");
+                tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];   
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+                     }
+                    }       
+                 }
+            }
+    //search
+    </script>
+</body>
+</html>
